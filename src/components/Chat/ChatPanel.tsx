@@ -83,7 +83,7 @@ const ChatPanel: React.FC<ChatPanelProps> = ({
       <div className="flex items-center justify-between p-4 border-b border-gray-200/50">
         <div className="flex items-center gap-2">
           <MessageCircle className="w-5 h-5 text-blue-500" />
-          <h3 className="font-semibold text-gray-800">Chat</h3>
+          <h3 className="font-semibold text-gray-800">Trò chuyện</h3>
           <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
             {messages.length}
           </span>

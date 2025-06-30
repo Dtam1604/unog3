@@ -29,7 +29,9 @@ const GameBoard: React.FC<GameBoardProps> = ({
         ) : (
           <RotateCcw className="w-5 h-5" />
         )}
-        <span className="text-sm capitalize">{gameState.direction}</span>
+        <span className="text-sm capitalize">
+          {gameState.direction === 'clockwise' ? 'Thuận chiều' : 'Ngược chiều'}
+        </span>
       </div>
 
       {/* Stacking indicator */}
@@ -38,11 +40,11 @@ const GameBoard: React.FC<GameBoardProps> = ({
           <div className="flex items-center gap-2 text-red-200">
             <Zap className="w-5 h-5" />
             <span className="font-bold">
-              Stacked: {gameState.stackedDrawCount} cards
+              Chồng bài: {gameState.stackedDrawCount} lá
             </span>
           </div>
           <div className="text-red-300 text-sm text-center">
-            {gameState.stackingType === 'draw-two' ? 'Stack +2 or +4, or draw all' : 'Stack +4 only, or draw all'}
+            {gameState.stackingType === 'draw-two' ? 'Chồng +2 hoặc +4, hoặc rút tất cả' : 'Chỉ chồng +4, hoặc rút tất cả'}
           </div>
         </div>
       )}
@@ -61,7 +63,7 @@ const GameBoard: React.FC<GameBoardProps> = ({
               </div>
               <div className="text-xs text-white/70 flex items-center justify-center gap-1">
                 {gameState.stackingType !== 'none' 
-                  ? `Draw ${gameState.stackedDrawCount}` 
+                  ? `Rút ${gameState.stackedDrawCount}` 
                   : (
                     <>
                       <Infinity className="w-3 h-3" />
@@ -78,8 +80,8 @@ const GameBoard: React.FC<GameBoardProps> = ({
           {/* Tooltip */}
           <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/80 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
             {gameState.stackingType !== 'none' 
-              ? `Click to draw ${gameState.stackedDrawCount} stacked cards`
-              : 'Click to draw cards (unlimited supply)'
+              ? `Nhấn để rút ${gameState.stackedDrawCount} lá bài chồng`
+              : 'Nhấn để rút bài (nguồn cung cấp vô hạn)'
             }
           </div>
         </div>
@@ -107,19 +109,19 @@ const GameBoard: React.FC<GameBoardProps> = ({
       {/* Current player indicator */}
       <div className="mt-6 text-center">
         <div className="text-white/90 text-lg font-semibold">
-          {currentPlayer.name}'s Turn
+          Lượt của {currentPlayer.name}
         </div>
         {gameState.isBlockAllActive && (
           <div className="mt-2 bg-orange-500/20 border border-orange-500/50 rounded-lg px-3 py-1">
             <span className="text-orange-200 text-sm font-medium">
-              🛡️ BlockAll Active - Number cards only
+              🛡️ Chặn tất cả đang hoạt động - Chỉ được đánh lá số
             </span>
           </div>
         )}
         {gameState.stackingType !== 'none' && (
           <div className="mt-2 bg-red-500/20 border border-red-500/50 rounded-lg px-3 py-1">
             <span className="text-red-200 text-sm font-medium">
-              🔥 {gameState.stackingType === 'draw-two' ? 'Stack +2/+4 or draw' : 'Stack +4 or draw'} {gameState.stackedDrawCount} cards
+              🔥 {gameState.stackingType === 'draw-two' ? 'Chồng +2/+4 hoặc rút' : 'Chồng +4 hoặc rút'} {gameState.stackedDrawCount} lá
             </span>
           </div>
         )}
@@ -128,7 +130,7 @@ const GameBoard: React.FC<GameBoardProps> = ({
         <div className="mt-2 bg-blue-500/20 border border-blue-500/50 rounded-lg px-3 py-1">
           <div className="flex items-center justify-center gap-2 text-blue-200 text-sm">
             <Infinity className="w-4 h-4" />
-            <span>Unlimited card supply - deck auto-reshuffles</span>
+            <span>Nguồn cung cấp bài vô hạn - bộ bài tự động xáo trộn</span>
           </div>
         </div>
       </div>
@@ -138,7 +140,7 @@ const GameBoard: React.FC<GameBoardProps> = ({
         <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl p-6 shadow-2xl">
             <h3 className="text-lg font-semibold text-gray-800 mb-4 text-center">
-              Choose a Color
+              Chọn Màu
             </h3>
             <div className="grid grid-cols-2 gap-4">
               {(['red', 'blue', 'green', 'yellow'] as CardColor[]).map(color => (
@@ -153,7 +155,10 @@ const GameBoard: React.FC<GameBoardProps> = ({
                   }`}
                 >
                   <span className="text-white font-bold capitalize text-sm">
-                    {color}
+                    {color === 'red' ? 'Đỏ' :
+                     color === 'blue' ? 'Xanh dương' :
+                     color === 'green' ? 'Xanh lá' :
+                     'Vàng'}
                   </span>
                 </button>
               ))}

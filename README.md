@@ -1,14 +1,14 @@
-# UNO Online Game
+# UNO Trực Tuyến
 
 Một game UNO trực tuyến được xây dựng với React, TypeScript, Node.js và Socket.IO.
 
 ## 🚀 Tính năng
 
-- **Multiplayer Online**: Chơi với bạn bè trên các máy tính khác nhau qua internet
-- **Real-time Communication**: Sử dụng WebSocket để đồng bộ game real-time
-- **Room System**: Tạo và tham gia phòng với mật khẩu tùy chọn
-- **Enhanced UNO Cards**: Bao gồm các lá bài mới như SwapHands, DrawMinusTwo, ShuffleMyHand, BlockAll
-- **Responsive Design**: Giao diện đẹp, tương thích mọi thiết bị
+- **Nhiều người chơi trực tuyến**: Chơi với bạn bè trên các máy tính khác nhau qua internet
+- **Giao tiếp thời gian thực**: Sử dụng WebSocket để đồng bộ game real-time
+- **Hệ thống phòng**: Tạo và tham gia phòng với mật khẩu tùy chọn
+- **Lá bài UNO nâng cao**: Bao gồm các lá bài mới như Đổi bài, Rút trừ 2, Xáo trộn, Chặn tất cả
+- **Thiết kế responsive**: Giao diện đẹp, tương thích mọi thiết bị
 - **AI Players**: Chơi với AI khi không đủ người
 
 ## 🛠️ Công nghệ sử dụng
@@ -17,18 +17,18 @@ Một game UNO trực tuyến được xây dựng với React, TypeScript, Node
 - React 18 + TypeScript
 - Tailwind CSS
 - Socket.IO Client
-- Lucide React (icons)
+- Lucide React (biểu tượng)
 - Vite
 
 ### Backend
 - Node.js + Express
 - Socket.IO Server
-- CORS support
-- UUID for unique IDs
+- Hỗ trợ CORS
+- UUID cho ID duy nhất
 
 ## 📦 Cài đặt
 
-### 1. Clone repository
+### 1. Sao chép repository
 ```bash
 git clone https://github.com/Dtam1604/unog3.git
 cd uno-online-game
@@ -39,7 +39,7 @@ cd uno-online-game
 npm install
 ```
 
-### 3. Tạo file environment
+### 3. Tạo file môi trường
 ```bash
 cp .env.example .env
 ```
@@ -67,7 +67,7 @@ npm run dev
 
 - **Frontend**: http://localhost:5173
 - **Backend**: http://localhost:3001
-- **Health Check**: http://localhost:3001/api/health
+- **Kiểm tra sức khỏe**: http://localhost:3001/api/health
 
 ## 🎮 Cách chơi
 
@@ -95,32 +95,32 @@ npm run dev
 ## 🃏 Các lá bài đặc biệt
 
 ### Lá bài cơ bản
-- **Skip**: Bỏ qua lượt người tiếp theo
-- **Reverse**: Đảo chiều chơi
-- **Draw 2**: Người tiếp theo rút 2 lá
-- **Wild**: Đổi màu
-- **Wild Draw 4**: Đổi màu + người tiếp theo rút 4 lá
+- **Bỏ qua**: Bỏ qua lượt người tiếp theo
+- **Đảo chiều**: Đảo chiều chơi
+- **Rút 2**: Người tiếp theo rút 2 lá
+- **Đổi màu**: Đổi màu
+- **Đổi màu Rút 4**: Đổi màu + người tiếp theo rút 4 lá
 
 ### Lá bài mới
-- **Swap Hands**: Đổi bài với người chơi khác
-- **Draw Minus 2**: Người tiếp theo bỏ 2 lá hoặc rút 2 lá
-- **Shuffle My Hand**: Bỏ tất cả bài và rút lại
-- **Block All**: Chỉ cho phép đánh lá số trong lượt tiếp theo
+- **Đổi bài**: Đổi bài với người chơi khác
+- **Rút trừ 2**: Người tiếp theo bỏ 2 lá hoặc rút 2 lá
+- **Xáo trộn**: Bỏ tất cả bài và rút lại
+- **Chặn tất cả**: Chỉ cho phép đánh lá số trong lượt tiếp theo
 
 ## 🔧 Cấu hình
 
-### Environment Variables
+### Biến môi trường
 ```env
 VITE_SERVER_URL=http://localhost:3001
 PORT=3001
 ```
 
-### CORS Configuration
+### Cấu hình CORS
 Server được cấu hình để chấp nhận kết nối từ:
 - http://localhost:5173 (Vite dev server)
-- http://localhost:3000 (Alternative port)
+- http://localhost:3000 (Cổng thay thế)
 
-## 🚀 Deploy
+## 🚀 Triển khai
 
 ### Frontend
 ```bash
@@ -132,29 +132,29 @@ npm run build
 npm run server
 ```
 
-### Docker (Optional)
-Có thể tạo Dockerfile để deploy dễ dàng hơn.
+### Docker (Tùy chọn)
+Có thể tạo Dockerfile để triển khai dễ dàng hơn.
 
-## 🐛 Troubleshooting
+## 🐛 Khắc phục sự cố
 
 ### Lỗi kết nối
-- Kiểm tra server đang chạy trên port 3001
-- Kiểm tra CORS configuration
-- Kiểm tra firewall settings
+- Kiểm tra server đang chạy trên cổng 3001
+- Kiểm tra cấu hình CORS
+- Kiểm tra cài đặt tường lửa
 
 ### Lỗi WebSocket
-- Đảm bảo browser hỗ trợ WebSocket
-- Kiểm tra proxy/firewall không block WebSocket
+- Đảm bảo trình duyệt hỗ trợ WebSocket
+- Kiểm tra proxy/tường lửa không chặn WebSocket
 
-### Lỗi room không đồng bộ
-- Server sẽ tự động cleanup rooms cũ sau 30 phút
-- Refresh trang để kết nối lại
+### Lỗi phòng không đồng bộ
+- Server sẽ tự động dọn dẹp phòng cũ sau 30 phút
+- Làm mới trang để kết nối lại
 
 ## 📝 API Endpoints
 
 ### REST API
 - `GET /api/rooms` - Lấy danh sách phòng
-- `GET /api/health` - Health check
+- `GET /api/health` - Kiểm tra sức khỏe
 
 ### WebSocket Events
 - `create-room` - Tạo phòng mới
@@ -163,14 +163,14 @@ Có thể tạo Dockerfile để deploy dễ dàng hơn.
 - `start-game` - Bắt đầu game
 - `toggle-ready` - Thay đổi trạng thái sẵn sàng
 
-## 🤝 Contributing
+## 🤝 Đóng góp
 
 1. Fork repository
 2. Tạo feature branch
-3. Commit changes
+3. Commit thay đổi
 4. Push to branch
-5. Create Pull Request
+5. Tạo Pull Request
 
-## 📄 License
+## 📄 Giấy phép
 
 MIT License - xem file LICENSE để biết thêm chi tiết.

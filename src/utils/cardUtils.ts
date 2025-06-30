@@ -90,7 +90,7 @@ export function ensureDrawPileHasCards(drawPile: Card[], discardPile: Card[], to
   
   // If draw pile doesn't have enough cards, reshuffle from discard pile
   if (newDrawPile.length < minCards) {
-    console.log(`🔄 Draw pile has ${newDrawPile.length} cards, need ${minCards}. Reshuffling discard pile...`);
+    console.log(`🔄 Bộ bài rút có ${newDrawPile.length} lá, cần ${minCards}. Đang xáo trộn bộ bài bỏ...`);
     
     // Keep only the top card in discard pile, reshuffle the rest into draw pile
     const cardsToReshuffle = newDiscardPile.slice(0, -1); // All except the last card (top card)
@@ -100,10 +100,10 @@ export function ensureDrawPileHasCards(drawPile: Card[], discardPile: Card[], to
       newDrawPile = [...newDrawPile, ...reshuffledCards];
       newDiscardPile = [topCard]; // Keep only the current top card
       
-      console.log(`✅ Reshuffled ${cardsToReshuffle.length} cards. Draw pile now has ${newDrawPile.length} cards.`);
+      console.log(`✅ Đã xáo trộn ${cardsToReshuffle.length} lá bài. Bộ bài rút hiện có ${newDrawPile.length} lá.`);
     } else {
       // If even the discard pile is empty (shouldn't happen in normal play), create a new deck
-      console.log(`⚠️ Both draw and discard piles are empty. Creating new deck...`);
+      console.log(`⚠️ Cả bộ bài rút và bỏ đều trống. Đang tạo bộ bài mới...`);
       const newDeck = shuffleDeck(createDeck());
       
       // Remove any cards that might be identical to the top card to avoid conflicts
@@ -112,7 +112,7 @@ export function ensureDrawPileHasCards(drawPile: Card[], discardPile: Card[], to
       );
       
       newDrawPile = [...newDrawPile, ...filteredDeck];
-      console.log(`✅ Added ${filteredDeck.length} new cards to draw pile.`);
+      console.log(`✅ Đã thêm ${filteredDeck.length} lá bài mới vào bộ bài rút.`);
     }
   }
   
@@ -138,7 +138,7 @@ export function canPlayCard(card: Card, topCard: Card, wildColor?: CardColor, st
   
   // If there's a wild color set (from previous wild card), ONLY match that color
   if (wildColor && wildColor !== 'wild') {
-    console.log(`🎯 Wild color active: ${wildColor}, checking card: ${card.color} ${card.type} ${card.value || ''}`);
+    console.log(`🎯 Màu đổi đang hoạt động: ${wildColor}, kiểm tra bài: ${card.color} ${card.type} ${card.value || ''}`);
     return card.color === wildColor;
   }
   
@@ -146,23 +146,23 @@ export function canPlayCard(card: Card, topCard: Card, wildColor?: CardColor, st
   
   // 1. Match color
   if (card.color === topCard.color) {
-    console.log(`✅ Color match: ${card.color} matches ${topCard.color}`);
+    console.log(`✅ Trùng màu: ${card.color} khớp với ${topCard.color}`);
     return true;
   }
   
   // 2. Match number (only for number cards)
   if (card.type === 'number' && topCard.type === 'number' && card.value === topCard.value) {
-    console.log(`✅ Number match: ${card.value} matches ${topCard.value}`);
+    console.log(`✅ Trùng số: ${card.value} khớp với ${topCard.value}`);
     return true;
   }
   
   // 3. Match action type (skip on skip, reverse on reverse, etc.)
   if (card.type === topCard.type && card.type !== 'number') {
-    console.log(`✅ Action match: ${card.type} matches ${topCard.type}`);
+    console.log(`✅ Trùng hành động: ${card.type} khớp với ${topCard.type}`);
     return true;
   }
   
-  console.log(`❌ No match: Card(${card.color} ${card.type} ${card.value || ''}) vs Top(${topCard.color} ${topCard.type} ${topCard.value || ''}) wildColor: ${wildColor || 'none'}`);
+  console.log(`❌ Không khớp: Bài(${card.color} ${card.type} ${card.value || ''}) vs Trên(${topCard.color} ${topCard.type} ${topCard.value || ''}) màuĐổi: ${wildColor || 'không'}`);
   return false;
 }
 
@@ -173,15 +173,15 @@ export function getCardDisplayName(card: Card): string {
   
   const typeNames: Record<CardType, string> = {
     'number': '',
-    'skip': 'Skip',
-    'reverse': 'Reverse',
-    'draw-two': 'Draw 2',
-    'wild': 'Wild',
-    'wild-draw-four': 'Wild +4',
-    'swap-hands': 'Swap',
-    'draw-minus-two': 'Draw -2',
-    'shuffle-my-hand': 'Shuffle',
-    'block-all': 'Block'
+    'skip': 'Bỏ qua',
+    'reverse': 'Đảo chiều',
+    'draw-two': 'Rút 2',
+    'wild': 'Đổi màu',
+    'wild-draw-four': 'Đổi màu +4',
+    'swap-hands': 'Đổi bài',
+    'draw-minus-two': 'Rút -2',
+    'shuffle-my-hand': 'Xáo trộn',
+    'block-all': 'Chặn'
   };
   
   return typeNames[card.type];
@@ -208,18 +208,18 @@ export function getCardSymbol(card: Card): string {
 export function validateCardPlay(card: Card, topCard: Card, wildColor?: CardColor, isBlockAllActive?: boolean, stackingType?: 'none' | 'draw-two' | 'wild-draw-four'): { valid: boolean; reason?: string } {
   // Check BlockAll restriction first
   if (isBlockAllActive && card.type !== 'number') {
-    return { valid: false, reason: 'BlockAll active - only number cards allowed' };
+    return { valid: false, reason: 'Chặn tất cả đang hoạt động - chỉ được đánh lá số' };
   }
   
   // Check stacking rules
   if (stackingType && stackingType !== 'none') {
     if (stackingType === 'draw-two') {
       if (card.type !== 'draw-two' && card.type !== 'wild-draw-four') {
-        return { valid: false, reason: 'Must stack +2 or +4 card, or draw cards' };
+        return { valid: false, reason: 'Phải chồng bài +2 hoặc +4, hoặc rút bài' };
       }
     } else if (stackingType === 'wild-draw-four') {
       if (card.type !== 'wild-draw-four') {
-        return { valid: false, reason: 'Must stack +4 card, or draw cards' };
+        return { valid: false, reason: 'Phải chồng bài +4, hoặc rút bài' };
       }
     }
   }
@@ -227,9 +227,34 @@ export function validateCardPlay(card: Card, topCard: Card, wildColor?: CardColo
   // Check basic UNO rules
   if (!canPlayCard(card, topCard, wildColor, stackingType)) {
     if (wildColor && wildColor !== 'wild') {
-      return { valid: false, reason: `Must match wild color: ${wildColor}` };
+      const colorNames = {
+        'red': 'đỏ',
+        'blue': 'xanh dương', 
+        'green': 'xanh lá',
+        'yellow': 'vàng'
+      };
+      return { valid: false, reason: `Phải khớp màu đổi: ${colorNames[wildColor as keyof typeof colorNames] || wildColor}` };
     } else {
-      return { valid: false, reason: `Must match color (${topCard.color}), number (${topCard.value}), or action (${topCard.type})` };
+      const colorNames = {
+        'red': 'đỏ',
+        'blue': 'xanh dương',
+        'green': 'xanh lá', 
+        'yellow': 'vàng'
+      };
+      const topCardColor = colorNames[topCard.color as keyof typeof colorNames] || topCard.color;
+      const actionNames = {
+        'skip': 'bỏ qua',
+        'reverse': 'đảo chiều',
+        'draw-two': 'rút 2',
+        'wild': 'đổi màu',
+        'wild-draw-four': 'đổi màu +4',
+        'swap-hands': 'đổi bài',
+        'draw-minus-two': 'rút -2',
+        'shuffle-my-hand': 'xáo trộn',
+        'block-all': 'chặn'
+      };
+      const topCardAction = actionNames[topCard.type as keyof typeof actionNames] || topCard.type;
+      return { valid: false, reason: `Phải khớp màu (${topCardColor}), số (${topCard.value}), hoặc hành động (${topCardAction})` };
     }
   }
   

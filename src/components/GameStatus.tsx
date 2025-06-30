@@ -88,7 +88,7 @@ const GameStatus: React.FC<GameStatusProps> = ({
                 </button>
               ) : (
                 <div className="text-white/70 text-sm">
-                  Chờ Host bắt đầu trận mới...
+                  Chờ Chủ phòng bắt đầu trận mới...
                 </div>
               )}
             </>
@@ -133,7 +133,7 @@ const GameStatus: React.FC<GameStatusProps> = ({
             <div className="flex items-center gap-2 bg-red-500/20 border border-red-500/50 rounded-lg px-3 py-1">
               <Zap className="w-4 h-4 text-red-300" />
               <span className="text-red-200 text-sm font-medium">
-                Stack: {gameState.stackedDrawCount}
+                Chồng: {gameState.stackedDrawCount}
               </span>
             </div>
           )}

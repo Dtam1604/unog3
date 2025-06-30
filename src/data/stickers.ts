@@ -1,50 +1,50 @@
 import { Sticker } from '../types/Chat';
 
 export const STICKERS: Sticker[] = [
-  // Emotions
-  { id: 'happy', emoji: '😊', name: 'Happy', category: 'emotions' },
-  { id: 'laugh', emoji: '😂', name: 'Laugh', category: 'emotions' },
-  { id: 'love', emoji: '😍', name: 'Love', category: 'emotions' },
-  { id: 'cool', emoji: '😎', name: 'Cool', category: 'emotions' },
-  { id: 'wink', emoji: '😉', name: 'Wink', category: 'emotions' },
-  { id: 'sad', emoji: '😢', name: 'Sad', category: 'emotions' },
-  { id: 'angry', emoji: '😠', name: 'Angry', category: 'emotions' },
-  { id: 'surprised', emoji: '😲', name: 'Surprised', category: 'emotions' },
+  // Cảm xúc
+  { id: 'happy', emoji: '😊', name: 'Vui vẻ', category: 'emotions' },
+  { id: 'laugh', emoji: '😂', name: 'Cười', category: 'emotions' },
+  { id: 'love', emoji: '😍', name: 'Yêu thích', category: 'emotions' },
+  { id: 'cool', emoji: '😎', name: 'Ngầu', category: 'emotions' },
+  { id: 'wink', emoji: '😉', name: 'Nháy mắt', category: 'emotions' },
+  { id: 'sad', emoji: '😢', name: 'Buồn', category: 'emotions' },
+  { id: 'angry', emoji: '😠', name: 'Tức giận', category: 'emotions' },
+  { id: 'surprised', emoji: '😲', name: 'Ngạc nhiên', category: 'emotions' },
 
-  // Reactions
-  { id: 'thumbs-up', emoji: '👍', name: 'Thumbs Up', category: 'reactions' },
-  { id: 'thumbs-down', emoji: '👎', name: 'Thumbs Down', category: 'reactions' },
-  { id: 'clap', emoji: '👏', name: 'Clap', category: 'reactions' },
-  { id: 'fire', emoji: '🔥', name: 'Fire', category: 'reactions' },
-  { id: 'heart', emoji: '❤️', name: 'Heart', category: 'reactions' },
-  { id: 'star', emoji: '⭐', name: 'Star', category: 'reactions' },
-  { id: 'thinking', emoji: '🤔', name: 'Thinking', category: 'reactions' },
-  { id: 'facepalm', emoji: '🤦', name: 'Facepalm', category: 'reactions' },
+  // Phản ứng
+  { id: 'thumbs-up', emoji: '👍', name: 'Thích', category: 'reactions' },
+  { id: 'thumbs-down', emoji: '👎', name: 'Không thích', category: 'reactions' },
+  { id: 'clap', emoji: '👏', name: 'Vỗ tay', category: 'reactions' },
+  { id: 'fire', emoji: '🔥', name: 'Tuyệt vời', category: 'reactions' },
+  { id: 'heart', emoji: '❤️', name: 'Trái tim', category: 'reactions' },
+  { id: 'star', emoji: '⭐', name: 'Ngôi sao', category: 'reactions' },
+  { id: 'thinking', emoji: '🤔', name: 'Suy nghĩ', category: 'reactions' },
+  { id: 'facepalm', emoji: '🤦', name: 'Bó tay', category: 'reactions' },
 
-  // Game specific
+  // Game
   { id: 'uno', emoji: '🎯', name: 'UNO!', category: 'game' },
-  { id: 'cards', emoji: '🃏', name: 'Cards', category: 'game' },
-  { id: 'winner', emoji: '🏆', name: 'Winner', category: 'game' },
-  { id: 'lightning', emoji: '⚡', name: 'Lightning', category: 'game' },
-  { id: 'bomb', emoji: '💣', name: 'Bomb', category: 'game' },
-  { id: 'target', emoji: '🎯', name: 'Target', category: 'game' },
-  { id: 'dice', emoji: '🎲', name: 'Dice', category: 'game' },
-  { id: 'magic', emoji: '✨', name: 'Magic', category: 'game' },
+  { id: 'cards', emoji: '🃏', name: 'Bài', category: 'game' },
+  { id: 'winner', emoji: '🏆', name: 'Chiến thắng', category: 'game' },
+  { id: 'lightning', emoji: '⚡', name: 'Tia chớp', category: 'game' },
+  { id: 'bomb', emoji: '💣', name: 'Bom', category: 'game' },
+  { id: 'target', emoji: '🎯', name: 'Mục tiêu', category: 'game' },
+  { id: 'dice', emoji: '🎲', name: 'Xúc xắc', category: 'game' },
+  { id: 'magic', emoji: '✨', name: 'Phép thuật', category: 'game' },
 
-  // Fun
-  { id: 'party', emoji: '🎉', name: 'Party', category: 'fun' },
-  { id: 'rocket', emoji: '🚀', name: 'Rocket', category: 'fun' },
-  { id: 'rainbow', emoji: '🌈', name: 'Rainbow', category: 'fun' },
-  { id: 'unicorn', emoji: '🦄', name: 'Unicorn', category: 'fun' },
-  { id: 'ghost', emoji: '👻', name: 'Ghost', category: 'fun' },
-  { id: 'alien', emoji: '👽', name: 'Alien', category: 'fun' },
+  // Vui nhộn
+  { id: 'party', emoji: '🎉', name: 'Tiệc tùng', category: 'fun' },
+  { id: 'rocket', emoji: '🚀', name: 'Tên lửa', category: 'fun' },
+  { id: 'rainbow', emoji: '🌈', name: 'Cầu vồng', category: 'fun' },
+  { id: 'unicorn', emoji: '🦄', name: 'Kỳ lân', category: 'fun' },
+  { id: 'ghost', emoji: '👻', name: 'Ma', category: 'fun' },
+  { id: 'alien', emoji: '👽', name: 'Người ngoài hành tinh', category: 'fun' },
   { id: 'robot', emoji: '🤖', name: 'Robot', category: 'fun' },
   { id: 'pizza', emoji: '🍕', name: 'Pizza', category: 'fun' }
 ];
 
 export const STICKER_CATEGORIES = [
-  { id: 'emotions', name: 'Emotions', icon: '😊' },
-  { id: 'reactions', name: 'Reactions', icon: '👍' },
+  { id: 'emotions', name: 'Cảm xúc', icon: '😊' },
+  { id: 'reactions', name: 'Phản ứng', icon: '👍' },
   { id: 'game', name: 'Game', icon: '🎯' },
-  { id: 'fun', name: 'Fun', icon: '🎉' }
+  { id: 'fun', name: 'Vui nhộn', icon: '🎉' }
 ] as const;

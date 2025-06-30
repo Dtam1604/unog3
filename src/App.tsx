@@ -66,7 +66,7 @@ function App() {
   } = useChatSystem(
     currentRoom?.id || null,
     currentPlayerId,
-    currentRoom?.players.find(p => p.id === currentPlayerId)?.name || 'Unknown'
+    currentRoom?.players.find(p => p.id === currentPlayerId)?.name || 'Không rõ'
   );
 
   // Use room game state if in multiplayer, otherwise use local game state
@@ -144,14 +144,14 @@ function App() {
 
   const handleCardClick = (card: Card) => {
     if (!isCurrentPlayerTurn) {
-      console.log('❌ Not your turn!');
+      console.log('❌ Không phải lượt của bạn!');
       return;
     }
     
     // Validate card play before allowing selection
     const validation = validateCardPlay(card, gameState.topCard, gameState.wildColor, gameState.isBlockAllActive, gameState.stackingType);
     if (!validation.valid) {
-      console.log('❌ Invalid card play:', validation.reason);
+      console.log('❌ Không thể đánh lá bài này:', validation.reason);
       return;
     }
 
@@ -159,7 +159,7 @@ function App() {
       setSelectedCard(card);
       setShowColorPicker(true);
     } else {
-      console.log('✅ Playing card:', `${card.color} ${card.type} ${card.value || ''}`);
+      console.log('✅ Đánh bài:', `${card.color} ${card.type} ${card.value || ''}`);
       playCard(currentPlayer!.id, card);
       setSelectedCard(null);
     }
@@ -167,7 +167,7 @@ function App() {
 
   const handleColorChoice = (color: CardColor) => {
     if (selectedCard && currentPlayer) {
-      console.log('✅ Playing wild card with color:', color);
+      console.log('✅ Đánh lá bài đổi màu với màu:', color);
       playCard(currentPlayer.id, selectedCard, color);
       setSelectedCard(null);
     }
@@ -176,11 +176,11 @@ function App() {
 
   const handleDrawCard = () => {
     if (isCurrentPlayerTurn && currentPlayer) {
-      console.log('📥 Drawing card for:', currentPlayer.name);
+      console.log('📥 Rút bài cho:', currentPlayer.name);
       
       // If stacking is active, handle stacked draw instead
       if (gameState.stackingType !== 'none') {
-        console.log('💥 Handling stacked draw instead of regular draw');
+        console.log('💥 Xử lý rút bài chồng thay vì rút bài thường');
         handleStackedDraw();
         return;
       }
@@ -188,11 +188,11 @@ function App() {
       // Check if player has any playable cards
       if (playableCards.length === 0) {
         // No playable cards - draw one card and pass turn
-        console.log('🎯 No playable cards - drawing 1 card and passing turn');
+        console.log('🎯 Không có bài có thể đánh - rút 1 lá và chuyển lượt');
         drawCard(currentPlayer.id, 1);
       } else {
         // Has playable cards but chose to draw - just draw without passing turn
-        console.log('🎯 Player chose to draw despite having playable cards');
+        console.log('🎯 Người chơi chọn rút bài dù có bài có thể đánh');
         drawCard(currentPlayer.id, 1);
       }
     }
@@ -254,7 +254,7 @@ function App() {
         <ChatPanel
           messages={messages}
           currentPlayerId={currentPlayerId}
-          currentPlayerName={currentRoom.players.find(p => p.id === currentPlayerId)?.name || 'Unknown'}
+          currentPlayerName={currentRoom.players.find(p => p.id === currentPlayerId)?.name || 'Không rõ'}
           onSendMessage={sendMessage}
           onSendSticker={sendSticker}
           isOpen={isChatOpen}
@@ -276,10 +276,10 @@ function App() {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-2 tracking-tight">
-            UNO Online
+            UNO Trực Tuyến
           </h1>
           <p className="text-white/70 text-lg">
-            {currentRoom ? `Phòng: ${currentRoom.name}` : 'Experience the classic card game with enhanced features'}
+            {currentRoom ? `Phòng: ${currentRoom.name}` : 'Trải nghiệm game bài cổ điển với tính năng nâng cao'}
           </p>
           {!isConnected && isMultiplayer && (
             <div className="mt-2 text-red-300 text-sm">
@@ -288,7 +288,7 @@ function App() {
           )}
           {isMultiplayer && (
             <div className="mt-2 text-blue-300 text-sm">
-              {isHost ? '👑 Bạn là Host - Quản lý trạng thái game' : '👥 Đang đồng bộ với Host'}
+              {isHost ? '👑 Bạn là Chủ phòng - Quản lý trạng thái game' : '👥 Đang đồng bộ với Chủ phòng'}
             </div>
           )}
         </div>
@@ -345,19 +345,19 @@ function App() {
           <h3 className="text-white font-semibold mb-2">Cách chơi:</h3>
           <ul className="text-white/70 text-sm space-y-1">
             <li>• Ghép bài theo màu, số hoặc ký hiệu</li>
-            <li>• Sử dụng lá bài hành động một cách chiến thuật (Skip, Reverse, Draw 2, v.v.)</li>
+            <li>• Sử dụng lá bài hành động một cách chiến thuật (Bỏ qua, Đảo chiều, Rút 2, v.v.)</li>
             <li>• Gọi UNO khi còn 1 lá bài</li>
-            <li>• Lá bài mới: SwapHands, DrawMinusTwo, ShuffleMyHand, BlockAll</li>
+            <li>• Lá bài mới: Đổi bài, Rút trừ 2, Xáo trộn, Chặn tất cả</li>
             <li>• <strong>Cộng bài:</strong> +2 có thể cộng với +2 hoặc +4, +4 chỉ cộng với +4</li>
             <li>• <strong>Loại bỏ:</strong> Người chơi có 35+ bài sẽ bị loại khỏi game</li>
             <li>• <strong>Rút bài vô hạn:</strong> Bộ bài tự động xáo trộn khi hết, không giới hạn số lượng bài có thể rút</li>
             <li>• Người đầu tiên hết bài thắng cuộc!</li>
             {isMultiplayer && (
               <>
-                <li>• <strong>Multiplayer:</strong> Host quản lý game, tất cả hành động được đồng bộ</li>
-                <li>• <strong>Real-time:</strong> Mọi người chơi cùng một trận game</li>
-                <li>• <strong>Validation:</strong> Chỉ có thể đánh bài hợp lệ theo luật UNO</li>
-                <li>• <strong>Chat & Stickers:</strong> Trò chuyện và gửi sticker trong game</li>
+                <li>• <strong>Nhiều người chơi:</strong> Chủ phòng quản lý game, tất cả hành động được đồng bộ</li>
+                <li>• <strong>Thời gian thực:</strong> Mọi người chơi cùng một trận game</li>
+                <li>• <strong>Kiểm tra:</strong> Chỉ có thể đánh bài hợp lệ theo luật UNO</li>
+                <li>• <strong>Trò chuyện & Biểu tượng:</strong> Trò chuyện và gửi biểu tượng cảm xúc trong game</li>
               </>
             )}
           </ul>
@@ -369,7 +369,7 @@ function App() {
         <ChatPanel
           messages={messages}
           currentPlayerId={currentPlayerId}
-          currentPlayerName={currentRoom.players.find(p => p.id === currentPlayerId)?.name || 'Unknown'}
+          currentPlayerName={currentRoom.players.find(p => p.id === currentPlayerId)?.name || 'Không rõ'}
           onSendMessage={sendMessage}
           onSendSticker={sendSticker}
           isOpen={isChatOpen}
